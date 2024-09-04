@@ -33,14 +33,11 @@ def generate_server_name():
     return (rnd_servername)
 
 
-
-
 def create_server(conn,servername):
     image = conn.image.find_image('cirros-0.6.2-x86_64-disk')
     flavor = conn.compute.find_flavor('m1.nano')
     network = conn.network.find_network('shared')
-    #keypair = conn.keypair.find
-
+    
     server = conn.compute.create_server(
         name=servername,
         image_id=image.id,
@@ -54,16 +51,7 @@ def create_server(conn,servername):
 
 #let's generate 10 servers for fun
 
-while while_loop <=10:
+while while_loop <=30:
     print ("Creating Server Number: " + str(while_loop))
     create_server(conn, generate_server_name())
     while_loop += 1
-
-
-
-#list_servers(conn) 
-
-
-
-
-
