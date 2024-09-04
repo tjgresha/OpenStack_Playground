@@ -1,0 +1,11 @@
+clouds:
+  openstack:
+    auth:
+      auth_url: http://172.232.163.233/identity
+      username: "admin"
+      project_id: 6269a6102c8649d48af2debfff4c543b
+      project_name: "admin"
+      user_domain_name: "Default"
+    region_name: "RegionOne"
+    interface: "public"
+    identity_api_version: 3
