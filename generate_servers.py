@@ -7,7 +7,7 @@ from openstack import connection
 
 #openstack.enable_logging(True, stream=sys.stdout)
 while_loop = 1
-
+servers_to_build=5
 
 conn = connection.Connection(
     region_name='RegionOne',
@@ -32,6 +32,10 @@ def generate_server_name():
     rnd_servername = ''.join(random.choices(string.ascii_letters,k=7))
     return (rnd_servername)
 
+def delete_servers(conn):
+    for server in conn.compute.servers():
+        print('Deleting Server: ' + server.name)
+        conn.compute.delete_server(server)
 
 def create_server(conn,servername):
     image = conn.image.find_image('cirros-0.6.2-x86_64-disk')
@@ -49,9 +53,11 @@ def create_server(conn,servername):
     server = conn.compute.wait_for_server(server)
 
 
-#let's generate 10 servers for fun
+#let's generate servers for fun
 
-while while_loop <=30:
+while while_loop <= servers_to_build:
     print ("Creating Server Number: " + str(while_loop))
     create_server(conn, generate_server_name())
     while_loop += 1
+
+delete_servers(conn)
